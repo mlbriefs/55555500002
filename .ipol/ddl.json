@@ -1,0 +1,119 @@
+{
+    "general": {
+        "demo_title": "Python Demo Template",
+        "requirements": "docker"
+    },
+
+    "params": [
+    {
+        "id": "price",
+        "type": "numeric",
+        "label": "Price",
+        "comments": "numeric data type",
+        "values": {
+            "min": 0,
+            "max": 1000,
+            "default": 30
+        }
+    },
+    {
+      "id": "water",
+      "label": "How much water",
+      "comments": "Sliding range data type",
+      "type": "range",
+      "values": {
+        "default": 0.15,
+        "max": 2,
+        "min": 0,
+        "step": 0.05
+      }
+    },
+    {
+        "id": "food",
+        "type": "selection_collapsed",
+        "label": "What will you eat",
+        "comments": "Collapsed selection data type. default_value corresponds to the value to refer to, not the labelling string! (here: 'soup' or 'dumplings', not 'I want soup' nor 'I want dumplings'.",
+        "values": {
+            "I want soup": "soup",
+            "I want dumplings": "dumplings"
+        },
+        "default_value": "dumplings"
+    },
+    {
+        "id": "drink",
+        "type": "selection_radio",
+        "label": "What to drink",
+        "comments": "Radio selection data type. As with selection_collapsed, default_value corresponds to the value, not the labelling string!",
+        "values": {
+            "Oolong tea": "oolong",
+            "Pu-erh tea": "puerh",
+            "Genmaicha": "genmaicha"
+        },
+        "default_value": "puerh"
+    },
+    {
+        "id": "size",
+        "type": "checkbox",
+        "label": "Large portions?",
+        "comments": "Checkbox data type. default_value should be 'true' or 'false', without quotation marks. Calling its value with (here) $size will return a 'true' or 'false' string, <b>not</b> a boolean!",
+        "default_value": false
+    },
+    {
+        "id": "place",
+        "type": "text",
+        "label": "Where shall we have lunch?",
+        "values": {
+            "maxlength": 15,
+            "default": "Milliways"
+        },
+        "comments": "Text data type"
+    },
+    {
+        "id": "why",
+        "type": "textarea",
+        "label": "Why?",
+        "default_value": "42\nand more",
+        "height": 50,
+        "width": "50%",
+        "wrap": true,
+        "comments": "Text area data type. Width can be specified as a number (same way as height) or as a string with a percentage (as in this example).\n Do not forget to escape the result when calling the demo (see run section) to avoid errors on multilines input"
+    },
+    {
+        "type": "label",
+        "label": "<i>The parameters below have <b>visibility</b> triggers.</i>"
+    },
+    {
+        "id": "bigger",
+        "type": "range",
+        "label": "how large?",
+        "values": {
+        "default": 10,
+        "max": 100,
+        "min": 1,
+        "step": 1
+      },
+      "visible": "params.size"
+    },
+    {
+        "id": "kingcrab",
+        "type": "checkbox",
+        "label": "Do you want king crab in your dumplings?",
+        "default_value": false,
+        "visible": "((params.price>50)||!(params.size))&&(params.food=='dumplings')",
+        "comment": "you can put any javascript expression in visible"
+    }
+    ],
+    "results": [
+        {
+            "contents": "stdout.txt",
+            "label": "<p>Output</p>",
+            "type": "text_file"
+        }
+    ],
+        "build": {
+        "url": "git@github.com:mlbriefs/55555500002.git",
+        "rev": "origin/main",
+        "dockerfile": ".ipol/Dockerfile"
+    },
+    "run": "python $bin/main.py --price $price --water $water --food $food --drink $drink --size $size --place $place --why \"$why\" --bigger $bigger --kingcrab $kingcrab"
+}
