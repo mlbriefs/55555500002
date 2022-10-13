@@ -1,26 +1,27 @@
-import os
-import iio
-import numpy as np
-
-# if you need to access a file next to the source code, use the variable ROOT
-# for example:
-#    torch.load(os.path.join(ROOT, 'weights.pth'))
-ROOT = os.path.dirname(os.path.realpath(__file__))
-
-def main(input, output, sigma):
-    u = iio.read(input)
-    print("hello world", u.shape)
-
-    v = u + np.random.randn(*u.shape) * sigma
-
-    iio.write(output, v)
+import argparse
+from sys import argv
 
 if __name__ == "__main__":
-    import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", type=str, required=True)
-    parser.add_argument("--sigma", type=float, required=True)
-    parser.add_argument("--output", type=str, required=True)
+    parser.add_argument("--price", type=int, required=True)
+    parser.add_argument("--water", type=float, required=True)
+    parser.add_argument("--food", type=str, required=True)
+    parser.add_argument("--drink", type=str, required=True)
+    parser.add_argument("--size", type=bool, required=True)
+    parser.add_argument("--place", type=str, required=True)
+    parser.add_argument("--why", type=str, required=True)
+    parser.add_argument("--bigger", type=int, required=True)
+    parser.add_argument("--kingcrab", type=bool, required=True)
 
-    args = parser.parse_args()
-    main(args.input, args.output, args.sigma)
+    args = parser.parse_args(argv[1:])
+    def printarg(name, arg):
+        print(f"Argument {name} has type {type(arg)} and evaluates to {arg}")
+    printarg(args.price)
+    printarg(args.water)
+    printarg(args.food)
+    printarg(args.drink)
+    printarg(args.size)
+    printarg(args.place)
+    printarg(args.why)
+    printarg(args.bigger)
+    printarg(args.kingcrab)
