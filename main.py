@@ -7,11 +7,11 @@ if __name__ == "__main__":
     parser.add_argument("--water", type=float, required=True)
     parser.add_argument("--food", type=str, required=True)
     parser.add_argument("--drink", type=str, required=True)
-    parser.add_argument("--size", type=bool, required=True)
+    parser.add_argument("--size", type=str, required=True)
     parser.add_argument("--place", type=str, required=True)
     parser.add_argument("--why", type=str, required=True)
     parser.add_argument("--bigger", type=int, required=True)
-    parser.add_argument("--kingcrab", type=bool, required=True)
+    parser.add_argument("--kingcrab", type=str, required=True)
 
     args = parser.parse_args(argv[1:])
     def printarg(name, arg):
@@ -25,3 +25,5 @@ if __name__ == "__main__":
     printarg("why", args.why)
     printarg("bigger", args.bigger)
     printarg("kingcrab", args.kingcrab)
+    
+    # To get a true boolean from a checkbox, do: args.size == "true"
