@@ -15,7 +15,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args(argv[1:])
     def printarg(name, arg):
-        print(f"Argument {name} has type {type(arg)} and evaluates to {arg}")
+        t = repr(type(arg)).replace('<', '').replace('>', '')
+        print(f"Argument {name} has type {t} and evaluates to {arg}")
     printarg("price", args.price)
     printarg("water", args.water)
     printarg("food", args.food)
