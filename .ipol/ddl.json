@@ -100,7 +100,7 @@
         "label": "Do you want king crab in your dumplings?",
         "default_value": false,
         "visible": "((params.price>50)||!(params.size))&&(params.food=='dumplings')",
-        "comment": "you can put any javascript expression in visible"
+        "comments": "you can put any javascript expression in visible"
     }
     ],
     "results": [
